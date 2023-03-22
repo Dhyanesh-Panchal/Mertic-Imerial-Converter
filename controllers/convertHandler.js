@@ -2,6 +2,11 @@ function ConvertHandler() {
 
   this.getNum = function (input) {
     let result = input;
+    //Checking double Fraction
+    if (input.split('/').length == 3) {
+      // console.log(input.split('/'))
+      return null;
+    }
     result = result.split(/(?<=\d)(?=[/a-zA-Z])/);
     if (result.length == 1) {
       result.unshift('1');
@@ -27,7 +32,7 @@ function ConvertHandler() {
     if (result.length == 3) {
       result.shift();
     }
-    return result[ 1 ];
+    return result[ result.length - 1 ];
   };
 
   this.getReturnUnit = function (initUnit) {
@@ -90,7 +95,7 @@ function ConvertHandler() {
         break;
     }
 
-    return result;
+    return Math.round(result * 100000) / 100000;
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {

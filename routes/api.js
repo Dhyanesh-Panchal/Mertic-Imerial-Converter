@@ -9,12 +9,16 @@ module.exports = function (app) {
   app.route('/api/convert').get((req, res) => {
     const input = req.query.input;
     console.log(input)
+
     const initNum = convertHandler.getNum(input);
     let initUnit = convertHandler.getUnit(input).toLowerCase();
     if (initUnit == 'l')
       initUnit = 'L';
-    const returnNum = Math.round(convertHandler.convert(initNum, initUnit) * 100000) / 100000;
+    console.log(initUnit)
+    const returnNum = convertHandler.convert(initNum, initUnit);
     const returnUnit = convertHandler.getReturnUnit(initUnit);
+
+
     if (!returnUnit) {
       if (!initNum) {
         // console.log(initNum)
